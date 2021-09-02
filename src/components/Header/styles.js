@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TABLET, DESCTOP } from '../../constants/styles';
+import { TABLET, DESCTOP, LAPTOP } from '../../constants/styles';
 
 export const Root = styled.header`
   background: #FFF;
@@ -8,6 +8,7 @@ export const Root = styled.header`
 
 export const Grid = styled.div`
   display: flex;
+  align-items: center;
   padding: 10px 0;
 `;
 
@@ -38,4 +39,36 @@ export const LogoContainer = styled.div`
 export const Logo = styled.img`
   margin-right: 5px;
   height: 100%;
+`;
+
+export const Nav = styled.nav`
+  display: none;
+  margin-left: 20px;
+
+  @media ${LAPTOP} {
+    display: block;
+    margin-left: 40px;
+  }
+`;
+
+export const NavItem = styled.span`
+  margin-left: 30px;
+  font-size: 16px;
+
+  a {
+    text-decoration: none;
+  }
+`;
+
+export const AuthContainer = styled.div`
+  display: none;
+  margin-left: auto;
+
+  @media ${LAPTOP} {
+    display: block;
+  }
+
+  button {
+    margin-left: 10px;
+  }
 `;
