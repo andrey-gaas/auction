@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Container, Button, Card } from '../../components';
+import { Header, Container, Button, Card, Footer } from '../../components';
 import {
   Root,
   TitleContainer,
@@ -84,6 +84,8 @@ function Main() {
           </Grid>
 
         </Container>
+
+        <Footer />
       </Root>
     </React.Fragment>
   );
