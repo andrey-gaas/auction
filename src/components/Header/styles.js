@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { TABLET, LAPTOP, DESCTOP } from '../../constants/styles';
+import { TABLET, DESCTOP } from '../../constants/styles';
 
 export const Root = styled.header`
   background: #FFF;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .3);
 `;
 
 export const Grid = styled.div`
