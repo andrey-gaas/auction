@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Root } from './styles';
 
-function Button({ children, fullWidth }) {
+function Button({ children, fullWidth, ...rest }) {
   return (
-    <Root fullWidth={fullWidth}>
+    <Root fullWidth={fullWidth} {...rest}>
       {children}
     </Root>
   );

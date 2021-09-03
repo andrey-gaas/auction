@@ -36,6 +36,7 @@ export const CloseButton = styled.button`
   height: 25px;
   background-color: #fff;
   border: none;
+  cursor: pointer;
 
   img {
     width: 100%;

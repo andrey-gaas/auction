@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Container from '../Container';
 import Button from '../Button';
@@ -15,6 +15,24 @@ import {
 import LogoSrc from '../../images/logo.svg';
 
 function Header() {
+  const [isOpen, setOpen] = useState(false);
+  const [type, setType] = useState(null);
+
+  function signIn() {
+    setOpen(true);
+    setType('sign-in');
+  }
+
+  function signUp() {
+    setOpen(true);
+    setType('sign-up');
+  }
+
+  function close() {
+    setOpen(false);
+    setType(null);
+  }
+
   return (
     <Root>
       <Container>
@@ -47,15 +65,16 @@ function Header() {
           </Nav>
 
           <AuthContainer>
-            <Button>Вход</Button>
-            <Button>Регистрация</Button>
+            <Button onClick={signIn}>Вход</Button>
+            <Button onClick={signUp}>Регистрация</Button>
           </AuthContainer>
         </Grid>
       </Container>
 
-      <Modal>
-        <h1>MODAL</h1>
-      </Modal>
+      {
+        isOpen &&
+          <Modal close={close} type={type} setType={setType} />
+      }
     </Root>
   );
 }
