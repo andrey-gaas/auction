@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Container from '../Container';
 import Button from '../Button';
 import Modal from '../Modal';
+import Menu from '../Menu';
 import {
   Root,
   Grid,
@@ -11,25 +12,28 @@ import {
   Nav,
   NavItem,
   AuthContainer,
+  MenuButton,
 } from './styles';
 import LogoSrc from '../../images/logo.svg';
+import MenuSrc from '../../images/menu.svg';
 
 function Header() {
-  const [isOpen, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [type, setType] = useState(null);
 
   function signIn() {
-    setOpen(true);
+    setModalOpen(true);
     setType('sign-in');
   }
 
   function signUp() {
-    setOpen(true);
+    setModalOpen(true);
     setType('sign-up');
   }
 
   function close() {
-    setOpen(false);
+    setModalOpen(false);
     setType(null);
   }
 
@@ -68,13 +72,23 @@ function Header() {
             <Button onClick={signIn}>Вход</Button>
             <Button onClick={signUp}>Регистрация</Button>
           </AuthContainer>
+
+          <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
+            <img src={MenuSrc} alt="" />
+          </MenuButton>
         </Grid>
       </Container>
 
       {
-        isOpen &&
+        modalOpen &&
           <Modal close={close} type={type} setType={setType} />
       }
+      <Menu
+        isOpen={menuOpen}
+        close={() => setMenuOpen(false)}
+        signIn={signIn}
+        signUp={signUp}
+      />
     </Root>
   );
 }

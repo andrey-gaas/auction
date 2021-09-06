@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import { DESCTOP, LAPTOP, TABLET } from '../../constants/styles';
 
 export const Root = styled.main`
-  margin-top: 20px;
+  margin-top: 80px;
 
   @media ${TABLET} {
-    margin-top: 40px;
+    margin-top: 120px;
   }
 
   @media ${DESCTOP} {
-    margin-top: 60px;
+    margin-top: 140px;
   }
 `;
 

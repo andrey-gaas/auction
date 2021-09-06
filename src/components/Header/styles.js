@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { TABLET, DESCTOP, LAPTOP } from '../../constants/styles';
 
 export const Root = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background: #FFF;
   box-shadow: 0 0 5px rgba(0, 0, 0, .3);
 `;
@@ -70,5 +74,21 @@ export const AuthContainer = styled.div`
 
   button {
     margin-left: 10px;
+  }
+`;
+
+export const MenuButton = styled.button`
+  margin-left: auto;
+  padding: 0;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: inherit;
+  img {
+    width: 100%;
+  }
+
+  @media ${LAPTOP} {
+    display: none;
   }
 `;
