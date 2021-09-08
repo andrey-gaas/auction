@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { lotsFetch } from '../../store/AC/lots';
 import { Header, Container, Button, Card, Footer } from '../../components';
 import {
   Root,
@@ -11,7 +15,20 @@ import {
   Description,
 } from './styles';
 
-function Main() {
+function Main({ lotsFetch, active, completed, coming }) {
+  
+  useEffect(() => {
+    lotsFetch('active');
+  }, [lotsFetch]);
+  
+  useEffect(() => {
+    lotsFetch('completed');
+  }, [lotsFetch]);
+  
+  useEffect(() => {
+    lotsFetch('coming');
+  }, [lotsFetch]);
+
   return (
     <React.Fragment>
       <Header />
@@ -22,24 +39,18 @@ function Main() {
             <FilterButtonContainer>
               <Button>Фильтр</Button>
             </FilterButtonContainer>
-            <BuyButtonContainer>
-              <Button>Купить ставки</Button>
-            </BuyButtonContainer>
           </TitleContainer>
 
           <Grid>
-            <CardContainer>
-              <Card />
-            </CardContainer>
-            <CardContainer>
-              <Card />
-            </CardContainer>
-            <CardContainer>
-              <Card />
-            </CardContainer>
-            <CardContainer>
-              <Card />
-            </CardContainer>
+            {
+              active.length ?
+                active.map(lot =>
+                  <CardContainer key={lot.id}>
+                    <Card type={lot.status} data={lot} />
+                  </CardContainer>
+                )
+                : <span>Загрузка...</span>
+            }
           </Grid>
 
           <TitleContainer>
@@ -47,18 +58,15 @@ function Main() {
           </TitleContainer>
 
           <Grid>
-            <CardContainer>
-              <Card completed />
-            </CardContainer>
-            <CardContainer>
-              <Card completed />
-            </CardContainer>
-            <CardContainer>
-              <Card completed />
-            </CardContainer>
-            <CardContainer>
-              <Card completed />
-            </CardContainer>
+            {
+              completed.length ?
+                completed.map(lot =>
+                  <CardContainer key={lot.id}>
+                    <Card type={lot.status} data={lot} />
+                  </CardContainer>
+                )
+                : <span>Загрузка...</span>
+            }
           </Grid>
 
           <TitleContainer>
@@ -69,18 +77,15 @@ function Main() {
           </Description>
 
           <Grid>
-            <CardContainer>
-              <Card coming />
-            </CardContainer>
-            <CardContainer>
-              <Card coming />
-            </CardContainer>
-            <CardContainer>
-              <Card coming />
-            </CardContainer>
-            <CardContainer>
-              <Card coming />
-            </CardContainer>
+            {
+              coming.length ?
+                coming.map(lot =>
+                  <CardContainer key={lot.id}>
+                    <Card type={lot.status} data={lot} />
+                  </CardContainer>
+                )
+                : <span>Загрузка...</span>
+            }
           </Grid>
 
         </Container>
@@ -91,4 +96,21 @@ function Main() {
   );
 }
 
-export default Main;
+Main.propTypes = {
+  lotsFetch: PropTypes.func.isRequired,
+  active:    PropTypes.array.isRequired,
+  completed: PropTypes.array.isRequired,
+  coming:    PropTypes.array.isRequired,
+};
+
+const mapStateToProps = ({ lots }) => ({
+  active: lots.active,
+  completed: lots.completed,
+  coming: lots.coming,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  lotsFetch,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -13,26 +13,20 @@ import {
   PriceContainer,
 } from './styles';
 
-function Card({ completed, coming }) {
-  let type = 'active';
-
-  if (completed) type = 'completed';
-  if (coming) type = 'coming';
-
-  console.log(type);
+function Card({ type, data }) {
 
   return (
     <Root type={type}>
       <Image
-        src="/images/photo.jpg"
-        alt="Игровая видеокарта MSI GAMING GeForce RTX 2080 Ti"
+        src={data.image}
+        alt={data.title}
       />
       <Title>
-        Игровая видеокарта MSI GAMING GeForce RTX 2080 Ti
+        {data.title}
       </Title>
       <PriceContainer>
         <Price>
-          2260,7 Рублей
+          {data.price} &#8381;
         </Price>
         {
           type === 'active' &&
@@ -50,7 +44,7 @@ function Card({ completed, coming }) {
       {
         type !== 'coming' &&
           <User>
-            DronDronDronDronDron
+            {data.lastUser}
           </User>
       }
       {
@@ -64,13 +58,14 @@ function Card({ completed, coming }) {
 }
 
 Card.propTypes = {
-  completed: PropTypes.bool,
-  coming:    PropTypes.bool,
-};
-
-Card.defaultProps = {
-  completed: false,
-  coming:    false,
+  type: PropTypes.string.isRequired,
+  data: PropTypes.shape({
+    image:    PropTypes.string.isRequired,
+    lastUser: PropTypes.string,
+    price:    PropTypes.number.isRequired,
+    status:   PropTypes.string.isRequired,
+    title:    PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Card;

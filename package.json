@@ -46,10 +46,10 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000/",
   "devDependencies": {
     "concurrently": "^6.2.1",
     "cross-env": "^7.0.3",
     "nodemon": "^2.0.12"
-  }
+  },
+  "proxy":  "http://localhost:5000"
 }

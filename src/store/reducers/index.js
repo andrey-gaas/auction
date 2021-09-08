@@ -1,9 +1,6 @@
 import { combineReducers } from 'redux';
-
-function reducer(state = { test: '123' }) {
-  return state;
-}
+import lots from './lots';
 
 export default combineReducers({
-  reducer,
+  lots,
 });
